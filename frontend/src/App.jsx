@@ -21,8 +21,8 @@ function formatToolResults(text) {
   if (!text) return text
   return text
     .replace(/(?:^|\s)Title:/g, '\n\n**Title:** ')
-    .replace(/\sURL:/g, '\n**URL:** ')
-    .replace(/\sSnippet:/g, '\n**Snippet:** ')
+    .replace(/\sURL:/g, '\n\n**URL:** ')
+    .replace(/\sSnippet:/g, '\n\n**Snippet:** ')
     .trim()
 }
 
@@ -33,7 +33,7 @@ function Markdown({ content }) {
       prose-headings:font-semibold prose-p:my-1 prose-li:my-0
       prose-pre:bg-base-300 prose-pre:overflow-x-auto prose-pre:max-w-full
       prose-code:before:content-none prose-code:after:content-none prose-code:break-all
-      prose-a:break-all prose-a:[overflow-wrap:anywhere]
+      prose-a:text-info prose-a:underline prose-a:break-all prose-a:[overflow-wrap:anywhere]
       [&_*]:min-w-0">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </div>

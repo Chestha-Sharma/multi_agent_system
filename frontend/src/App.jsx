@@ -17,10 +17,24 @@ const STAGES = [
   { key: 'feedback', label: 'Critic Feedback', icon: Sparkles, color: 'text-info', border: 'border-info', bg: 'bg-info/10' },
 ]
 
+function formatToolResults(text) {
+  if (!text) return text
+  return text
+    .replace(/(?:^|\s)Title:/g, '\n\n**Title:** ')
+    .replace(/\sURL:/g, '\n**URL:** ')
+    .replace(/\sSnippet:/g, '\n**Snippet:** ')
+    .trim()
+}
+
 function Markdown({ content }) {
   if (!content) return null
   return (
-    <div className="prose prose-sm max-w-none prose-headings:font-semibold prose-p:my-1 prose-li:my-0 prose-pre:bg-base-300 prose-pre:overflow-x-auto prose-code:before:content-none prose-code:after:content-none">
+    <div className="prose prose-sm max-w-none break-words overflow-hidden
+      prose-headings:font-semibold prose-p:my-1 prose-li:my-0
+      prose-pre:bg-base-300 prose-pre:overflow-x-auto prose-pre:max-w-full
+      prose-code:before:content-none prose-code:after:content-none prose-code:break-all
+      prose-a:break-all prose-a:[overflow-wrap:anywhere]
+      [&_*]:min-w-0">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
     </div>
   )
@@ -34,7 +48,7 @@ function UserBubble({ content }) {
           <User className="h-4 w-4" />
         </div>
       </div>
-      <div className="chat-bubble bg-primary text-primary-content rounded-2xl rounded-br-sm">
+      <div className="chat-bubble bg-primary text-primary-content rounded-2xl rounded-br-sm max-w-[85%] sm:max-w-[75%] min-w-0 overflow-hidden">
         <Markdown content={content} />
       </div>
     </div>
@@ -49,7 +63,7 @@ function ErrorBubble({ content }) {
           <AlertTriangle className="h-4 w-4" />
         </div>
       </div>
-      <div className="chat-bubble bg-error/10 text-base-content border border-error/30 rounded-2xl rounded-bl-sm">
+      <div className="chat-bubble bg-error/10 text-base-content border border-error/30 rounded-2xl rounded-bl-sm max-w-[85%] sm:max-w-[75%] min-w-0 overflow-hidden">
         <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-error">Error</div>
         <div className="text-sm break-words">{content}</div>
       </div>
@@ -57,15 +71,16 @@ function ErrorBubble({ content }) {
   )
 }
 
-function StageBlock({ label, content, color, border, bg, Icon }) {
+function StageBlock({ label, content, color, border, bg, Icon, isToolResult }) {
   if (!content) return null
+  const displayContent = isToolResult ? formatToolResults(content) : content
   return (
-    <div className={`rounded-xl border ${border}/30 ${bg} p-3 sm:p-4`}>
+    <div className={`rounded-xl border ${border}/30 ${bg} p-3 sm:p-4 min-w-0 overflow-hidden`}>
       <div className={`mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider ${color}`}>
         <Icon className="h-3.5 w-3.5" />
         {label}
       </div>
-      <Markdown content={content} />
+      <Markdown content={displayContent} />
     </div>
   )
 }
@@ -78,7 +93,7 @@ function AssistantBubble({ data }) {
           <Bot className="h-4 w-4" />
         </div>
       </div>
-      <div className="chat-bubble flex flex-col gap-3 bg-base-200 text-base-content rounded-2xl rounded-bl-sm max-w-[90%] sm:max-w-[85%] p-3 sm:p-4">
+      <div className="chat-bubble flex flex-col gap-3 bg-base-200 text-base-content rounded-2xl rounded-bl-sm max-w-[90%] sm:max-w-[85%] p-3 sm:p-4 min-w-0 overflow-hidden">
         {STAGES.map((s) => (
           <StageBlock
             key={s.key}
@@ -88,6 +103,7 @@ function AssistantBubble({ data }) {
             border={s.border}
             bg={s.bg}
             Icon={s.icon}
+            isToolResult={s.key === 'search_results' || s.key === 'reader_results'}
           />
         ))}
       </div>
@@ -164,7 +180,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen flex-col bg-base-100">
+    <div className="flex h-screen flex-col bg-base-100 overflow-x-hidden">
       {/* Header */}
       <header className="flex items-center justify-between border-b border-base-300 bg-base-100 px-3 py-2.5 sm:px-5 sm:py-3">
         <div className="flex items-center gap-2 text-sm font-semibold">
@@ -211,7 +227,7 @@ export default function App() {
 
         {/* Main chat area */}
         <div className="flex flex-1 flex-col overflow-hidden min-w-0">
-          <div ref={scrollRef} className="flex-1 space-y-1 overflow-y-auto p-3 sm:p-5">
+          <div ref={scrollRef} className="flex-1 space-y-1 overflow-y-auto overflow-x-hidden p-3 sm:p-5 min-w-0">
             {messages.length === 0 && (
               <div className="flex h-full flex-col items-center justify-center gap-3 text-center opacity-60 px-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">

@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Search, FileText, PenLine, Sparkles, Send, User, Bot, AlertTriangle } from 'lucide-react'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const API_URL = import.meta.env.VITE_API_URL
 
 const TOOLS = [
   { name: 'web_search', desc: 'Searches the web via Tavily for recent, reliable sources.' },

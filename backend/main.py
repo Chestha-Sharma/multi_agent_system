@@ -18,7 +18,7 @@ load_dotenv()
 
 app = FastAPI(title="Multi-Agent Pipeline API")
 
-allowed_origins = [ 
+allowed_origins = [
     os.getenv("FRONTEND_ORIGIN")
 ]
 app.add_middleware(

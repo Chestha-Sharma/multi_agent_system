@@ -18,9 +18,8 @@ load_dotenv()
 
 app = FastAPI(title="Multi-Agent Pipeline API")
 
-allowed_origins = [
-    "http://localhost:5173",
-    os.getenv("FRONTEND_ORIGIN", ""),
+allowed_origins = [ 
+    os.getenv("FRONTEND_ORIGIN")
 ]
 app.add_middleware(
     CORSMiddleware,

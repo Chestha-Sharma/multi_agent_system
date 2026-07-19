@@ -5,7 +5,7 @@ from tools import get_tool_output
 
 
 #base function
-def run_research_pipeline(topic : str) -> dict:
+def run_research_pipeline(topic : str,history: list = None) -> dict:
 
     state = {}
     history = history or []

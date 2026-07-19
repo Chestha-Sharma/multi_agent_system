@@ -41,9 +41,14 @@ def _to_text(value) -> str:
     return str(value)
 
 
+conversation_history = []
+
+
 def run_agent_pipeline(query: str) -> dict:
     from pipeline import run_research_pipeline
-    result = run_research_pipeline(query)
+    result = run_research_pipeline(query,conversation_history)
+    conversation_history.append({"role": "user", "content": query})
+    conversation_history.append({"role": "assistant", "content": _to_text(result.get("report", ""))})
     return {
         "search_results": _to_text(result.get("search_results", "")),
         "reader_results": _to_text(result.get("reader_results", "")),

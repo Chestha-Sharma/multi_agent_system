@@ -8,7 +8,7 @@ from tools import get_tool_output
 def run_research_pipeline(topic : str) -> dict:
 
     state = {}
-    history = []
+    history = history or []
 
     #search agent working
     print("\n"+"="*50)

@@ -8,6 +8,7 @@ from tools import get_tool_output
 def run_research_pipeline(topic : str) -> dict:
 
     state = {}
+    history = []
 
     #search agent working
     print("\n"+"="*50)
@@ -15,8 +16,9 @@ def run_research_pipeline(topic : str) -> dict:
     print("="*50)
 
     search_agent = build_search_agent()
+    messages = history + [{"role": "user", "content": topic}]
     search_result = search_agent.invoke({
-    "messages": [{"role": "user", "content": topic}]
+    "messages" : messages
     })
 
     tool_output = get_tool_output(search_result['messages'], tool_name="web_search")
@@ -81,4 +83,3 @@ if __name__ == "__main__":
 
 
 
- 

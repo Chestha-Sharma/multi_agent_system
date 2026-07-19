@@ -18,7 +18,7 @@ def run_research_pipeline(topic : str,history: list = None) -> dict:
     search_agent = build_search_agent()
     messages = history + [{"role": "user", "content": topic}]
     search_result = search_agent.invoke({
-    "message" : messages
+    "messages" : messages
     })
 
     tool_output = get_tool_output(search_result['messages'], tool_name="web_search")

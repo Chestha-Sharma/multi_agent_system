@@ -9,7 +9,7 @@ function inlineFormater(text) {
     if(part.startsWith("**") && part.endsWith("**")){
       return <span key={i}>{part.slice(2,-2)}</span>
     }
-    return part
+    return part;
   })
 }
 

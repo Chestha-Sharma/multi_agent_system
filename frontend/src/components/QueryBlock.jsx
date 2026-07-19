@@ -7,7 +7,7 @@ import ResultCard from './ResultCard.jsx'
 
 
 
-export default function QueryBlock({query,data, loading, error}){4
+export default function QueryBlock({query,data, loading, error}){
     if(!query) return null
       return(
      <div className="space-y-3">

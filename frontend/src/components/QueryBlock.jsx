@@ -1,7 +1,7 @@
 
 
 
-import { Search , FilterText , PenLine , Sparkles} from 'lucide-react'
+import { Search , FileText , PenLine , Sparkles} from 'lucide-react'
 import ResultCard from './ResultCard.jsx'
 
 

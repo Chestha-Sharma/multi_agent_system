@@ -5,7 +5,7 @@ import { Send } from 'lucide-react'
 
 
 
-export default function ChatInput({intput , setInput ,onSend , busy}){
+export default function ChatInput({input , setInput ,onSend , busy}){
     function onKeyDown(e){
         if(e.key === 'Enter' && !e.shiftKey){
             e.preventDefault()

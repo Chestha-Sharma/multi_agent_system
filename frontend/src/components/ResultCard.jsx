@@ -1,6 +1,6 @@
 import Markdown from './Markdown.jsx'
 
-export default function ResultCard({title,content,icon:Icon,accessClass}){
+export default function ResultCard({title,content,icon:Icon,accentClass}){
     if(!content) return null
     return(
         <div className={`rounded-xl border ${accentClass} bg-base-200 p-4`}>

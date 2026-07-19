@@ -8,7 +8,7 @@ export default function ResultCard({title,content,icon:Icon,accentClass}){
         {Icon && <Icon className="h-4 w-4" />}
         {title}
       </div>
-      <Markdown text={content} />
+      <Markdown content={content} />
     </div>
     )
 }

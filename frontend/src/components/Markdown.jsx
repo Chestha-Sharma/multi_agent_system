@@ -13,9 +13,9 @@ function inlineFormater(text) {
   })
 }
 
-export default function Markdown({text}) {1
-    if(!text) return null
-    const lines = text.split("\n")
+export default function Markdown({content}) {
+    if(!content) return null
+    const lines = content.split("\n")
 
     return(
         <div className="text-sm leading-relaxed space-y-1 break-words">
@@ -29,6 +29,7 @@ export default function Markdown({text}) {1
                    </div>
                  )
                 }
+                return <p key={i}>{inlineFormater(line)}</p>
             })}
         </div>
     )

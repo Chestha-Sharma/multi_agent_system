@@ -25,7 +25,7 @@ export default function Markdown({text}) {1
                     return (
                    <div key={i} className="flex gap-2 pl-1">
                      <span className="opacity-50">•</span>
-                     <span>{inlineFormat(line.slice(2))}</span>
+                     <span>{inlineFormater(line.slice(2))}</span>
                    </div>
                  )
                 }
